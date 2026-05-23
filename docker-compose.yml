@@ -15,8 +15,7 @@ services:
   # 9Router - Core AI Routing Proxy
   # ----------------------------------------------------------
   9router:
-    image: mxyng/9router:latest
-    container_name: hai_9router
+    image: decolua/9router:latest    container_name: hai_9router
     restart: unless-stopped
 
     # --- Ports ---
