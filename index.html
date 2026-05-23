@@ -388,12 +388,12 @@
 
         function detectBrowserLanguage() {
             const shortLang = (navigator.language || '').toLowerCase().slice(0, 2);
-            return supportedLanguages.includes(shortLang) ? shortLang : 'en';
+            return supportedLanguages.includes(shortLang) ? shortLang : 'de';
         }
 
         const savedLang = localStorage.getItem('9router_lang');
         const browserLang = detectBrowserLanguage();
-        setLanguage(supportedLanguages.includes(savedLang) ? savedLang : browserLang);
+        setLanguage(savedLang || browserLang);
         setInterval(updateMetrics, 1000);
         setTimeout(() => location.reload(), 10000);
     </script>
