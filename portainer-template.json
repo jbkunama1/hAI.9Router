@@ -1,0 +1,91 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 3,
+      "title": "hAI.9Router",
+      "description": "🤖 AI Routing Proxy with LAN Dashboard - Intelligent routing to OpenAI, Ollama, and LocalAI backends",
+      "note": "Deploys 9Router on port 20128 with persistent volumes and health checks.",
+      "categories": ["AI", "Proxy", "LAN", "Routing"],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/jbkunama1/hAI.9Router/main/logo.png",
+      "repository": {
+        "url": "https://github.com/jbkunama1/hAI.9Router",
+        "stackfile": "docker-compose.yml"
+      },
+      "env": [
+        {
+          "name": "ROUTER_PORT",
+          "label": "Dashboard Port",
+          "default": "20128",
+          "description": "External port for the 9Router dashboard"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "label": "OpenAI API Key",
+          "description": "Your OpenAI API key (get from: https://platform.openai.com/api-keys)"
+        },
+        {
+          "name": "OLLAMA_HOST",
+          "label": "Ollama Backend URL",
+          "default": "http://ollama:11434",
+          "description": "URL to your Ollama instance"
+        },
+        {
+          "name": "LOCAL_AI_HOST",
+          "label": "LocalAI Backend URL",
+          "default": "http://localai:8080",
+          "description": "URL to your LocalAI instance"
+        },
+        {
+          "name": "LOG_LEVEL",
+          "label": "Log Level",
+          "default": "info",
+          "select": [
+            {"text": "Debug", "value": "debug"},
+            {"text": "Info", "value": "info", "default": true},
+            {"text": "Warn", "value": "warn"},
+            {"text": "Error", "value": "error"}
+          ],
+          "description": "Logging verbosity level"
+        },
+        {
+          "name": "HEALTH_CHECK_INTERVAL",
+          "label": "Health Check Interval (seconds)",
+          "default": "30",
+          "description": "Interval between health checks in seconds"
+        },
+        {
+          "name": "DASHBOARD_TITLE",
+          "label": "Dashboard Title",
+          "default": "hAI.9Router - LAN Dashboard",
+          "description": "Custom title for the dashboard"
+        },
+        {
+          "name": "TZ",
+          "label": "Timezone",
+          "default": "Europe/Berlin",
+          "description": "Container timezone (e.g., Europe/Berlin, America/New_York)"
+        }
+      ],
+      "volumes": [
+        {
+          "container": "/app/config",
+          "bind": "9router_config"
+        },
+        {
+          "container": "/app/logs",
+          "bind": "9router_logs"
+        }
+      ],
+      "ports": ["20128:20128/tcp"],
+      "restart_policy": "unless-stopped",
+      "labels": [
+        {"name": "com.docker.compose.project", "value": "hai-9router"},
+        {"name": "org.opencontainers.image.title", "value": "hAI.9Router"},
+        {"name": "org.opencontainers.image.version", "value": "1.0.0"},
+        {"name": "org.opencontainers.image.licenses", "value": "MIT"}
+      ]
+    }
+  ]
+}
