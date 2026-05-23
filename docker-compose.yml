@@ -1,0 +1,128 @@
+# =============================================================
+# hAI.9Router - Portainer Stack Template
+# AI Routing Proxy with LAN Status Dashboard
+# Port: 20128 | Network: 9router_net
+# =============================================================
+
+version: "3.9"
+
+# -----------------------------------------------------------
+# SERVICES
+# -----------------------------------------------------------
+services:
+
+  # ----------------------------------------------------------
+  # 9Router - Core AI Routing Proxy
+  # ----------------------------------------------------------
+  9router:
+    image: mxyng/9router:latest
+    container_name: hai_9router
+    restart: unless-stopped
+
+    # --- Ports ---
+    ports:
+      - "${ROUTER_PORT:-20128}:20128"
+
+    # --- Environment ---
+    environment:
+      # AI Backend URLs
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://ollama:11434}
+      - LOCAL_AI_HOST=${LOCAL_AI_HOST:-http://localai:8080}
+
+      # Dashboard & Routing Config
+      - ROUTER_LOG_LEVEL=${LOG_LEVEL:-info}
+      - HEALTH_CHECK_INTERVAL=${HEALTH_CHECK_INTERVAL:-30}
+      - DASHBOARD_TITLE=${DASHBOARD_TITLE:-hAI.9Router - LAN Dashboard}
+
+      # Security
+      - TZ=${TZ:-Europe/Berlin}
+
+    # --- Volumes ---
+    volumes:
+      - 9router_config:/app/config
+      - 9router_logs:/app/logs
+      # Mount custom dashboard (optional)
+      - ./index.html:/app/static/index.html:ro
+
+    # --- Networks ---
+    networks:
+      - 9router_net
+
+    # --- Health Check ---
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:20128/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+    # --- Resource Limits ---
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 64M
+
+    # --- Security ---
+    security_opt:
+      - no-new-privileges:true
+    read_only: false
+
+    # --- Labels (Portainer / Traefik) ---
+    labels:
+      - "com.docker.compose.project=hai-9router"
+      - "org.opencontainers.image.title=hAI.9Router"
+      - "org.opencontainers.image.description=AI Routing Proxy with LAN Dashboard"
+      - "org.opencontainers.image.version=1.0.0"
+      - "org.opencontainers.image.licenses=MIT"
+      # Portainer labels
+      - "io.portainer.accesscontrol.teams="
+      # Optional: Traefik integration
+      # - "traefik.enable=true"
+      # - "traefik.http.routers.9router.rule=Host(`9router.local`)"
+      # - "traefik.http.services.9router.loadbalancer.server.port=20128"
+
+# -----------------------------------------------------------
+# VOLUMES
+# -----------------------------------------------------------
+volumes:
+  9router_config:
+    name: 9router_config
+    driver: local
+    labels:
+      - "project=hAI.9Router"
+      - "description=Router configuration files"
+
+  9router_logs:
+    name: 9router_logs
+    driver: local
+    labels:
+      - "project=hAI.9Router"
+      - "description=Application logs"
+
+# -----------------------------------------------------------
+# NETWORKS
+# -----------------------------------------------------------
+networks:
+  9router_net:
+    name: 9router_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          gateway: 172.28.0.1
+    labels:
+      - "project=hAI.9Router"
+      - "description=Isolated network for AI routing services"
+
+# -----------------------------------------------------------
+# USAGE:
+#   CLI:        docker compose up -d
+#   Portainer:  Stacks > Add Stack > Repository
+#               URL: https://github.com/jbkunama1/hAI.9Router
+#   Dashboard:  http://<HOST-IP>:20128
+# -----------------------------------------------------------
