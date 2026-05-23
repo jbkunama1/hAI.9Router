@@ -1,5 +1,6 @@
 <div align="center">
-
+<img src="logo_9router.png" alt="hAI.9Router Logo" width="300">
+ 
 # 🤖 hAI.9Router
 
 ### AI Routing Proxy — Portainer Stack Template
