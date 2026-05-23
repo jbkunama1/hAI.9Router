@@ -302,6 +302,7 @@
         let startTime = Date.now();
         let requestCount = 0;
         let currentLang = 'de';
+        const supportedLanguages = ['de', 'en'];
 
         const i18n = {
             de: {
@@ -355,9 +356,10 @@
         };
 
         function setLanguage(lang) {
-            currentLang = lang in i18n ? lang : 'de';
+            currentLang = supportedLanguages.includes(lang) ? lang : 'de';
             document.documentElement.lang = currentLang;
             document.title = i18n[currentLang].pageTitle;
+            localStorage.setItem('9router_lang', currentLang);
 
             document.querySelectorAll('[data-i18n]').forEach((el) => {
                 const key = el.getAttribute('data-i18n');
@@ -384,7 +386,9 @@
             document.getElementById('lastcheck').textContent = i18n[currentLang].lastCheckNow;
         }
 
-        setLanguage((navigator.language || '').toLowerCase().startsWith('de') ? 'de' : 'en');
+        const savedLang = localStorage.getItem('9router_lang');
+        const browserLang = (navigator.language || '').toLowerCase().startsWith('de') ? 'de' : 'en';
+        setLanguage(supportedLanguages.includes(savedLang) ? savedLang : browserLang);
         setInterval(updateMetrics, 1000);
         setTimeout(() => location.reload(), 10000);
     </script>
