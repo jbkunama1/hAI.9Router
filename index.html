@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 hAI.9Router | LAN Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .icon {
+            font-size: 2.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.online {
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+        }
+        
+        .status-dot.offline {
+            background: #ff4444;
+            box-shadow: 0 0 10px #ff4444;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .info {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .metric-label {
+            opacity: 0.8;
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        .refresh {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .refresh:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 hAI.9Router</h1>
+            <p class="subtitle">AI Routing Proxy — LAN Status Dashboard</p>
+        </header>
+        
+        <div class="dashboard">
+            <!-- 9Router Main Service -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🚀</span>
+                    <h2 class="card-title">9Router Core</h2>
+                </div>
+                <div class="status">
+                    <span class="status-dot online"></span>
+                    <span>Online</span>
+                </div>
+                <p class="info">Hauptrouting-Service aktiv auf Port 20128</p>
+                <div class="metric">
+                    <span class="metric-label">Uptime:</span>
+                    <span class="metric-value" id="uptime">0h 0m</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Requests:</span>
+                    <span class="metric-value" id="requests">0</span>
+                </div>
+            </div>
+            
+            <!-- OpenAI Backend -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🟢</span>
+                    <h2 class="card-title">OpenAI</h2>
+                </div>
+                <div class="status">
+                    <span class="status-dot online"></span>
+                    <span>Connected</span>
+                </div>
+                <p class="info">GPT-4, GPT-3.5, Embeddings</p>
+                <div class="metric">
+                    <span class="metric-label">Model:</span>
+                    <span class="metric-value">gpt-4o</span>
+                </div>
+            </div>
+            
+            <!-- Ollama Backend -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🟡</span>
+                    <h2 class="card-title">Ollama</h2>
+                </div>
+                <div class="status">
+                    <span class="status-dot online"></span>
+                    <span>Connected</span>
+                </div>
+                <p class="info">Local AI Models (llama3, mistral)</p>
+                <div class="metric">
+                    <span class="metric-label">Port:</span>
+                    <span class="metric-value">11434</span>
+                </div>
+            </div>
+            
+            <!-- LocalAI Backend -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🔵</span>
+                    <h2 class="card-title">LocalAI</h2>
+                </div>
+                <div class="status">
+                    <span class="status-dot online"></span>
+                    <span>Connected</span>
+                </div>
+                <p class="info">Self-hosted AI Backend</p>
+                <div class="metric">
+                    <span class="metric-label">Port:</span>
+                    <span class="metric-value">8080</span>
+                </div>
+            </div>
+            
+            <!-- Network Info -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🌐</span>
+                    <h2 class="card-title">Netzwerk</h2>
+                </div>
+                <div class="status">
+                    <span class="status-dot online"></span>
+                    <span>9router_net</span>
+                </div>
+                <p class="info">Bridge Netzwerk: 172.28.0.0/16</p>
+                <div class="metric">
+                    <span class="metric-label">Gateway:</span>
+                    <span class="metric-value">172.28.0.1</span>
+                </div>
+            </div>
+            
+            <!-- Health Status -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">❤️</span>
+                    <h2 class="card-title">Gesundheit</h2>
+                </div>
+                <div class="status">
+                    <span class="status-dot online"></span>
+                    <span>Healthy</span>
+                </div>
+                <p class="info">Alle Health Checks passed</p>
+                <div class="metric">
+                    <span class="metric-label">Letzter Check:</span>
+                    <span class="metric-value" id="lastcheck">vor 0s</span>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>🤖 hAI.9Router v1.0.0 — Portainer Stack Template</p>
+            <button class="refresh" onclick="location.reload()">Auto-Refresh: 10s 🔄</button>
+        </footer>
+    </div>
+    
+    <script>
+        // Simulated metrics (replace with API calls)
+        let startTime = Date.now();
+        let requestCount = 0;
+        
+        function updateMetrics() {
+            const uptime = Math.floor((Date.now() - startTime) / 1000);
+            const hours = Math.floor(uptime / 3600);
+            const minutes = Math.floor((uptime % 3600) / 60);
+            
+            document.getElementById('uptime').textContent = `${hours}h ${minutes}m`;
+            document.getElementById('requests').textContent = requestCount++;
+            document.getElementById('lastcheck').textContent = 'vor 0s';
+        }
+        
+        // Update metrics every second
+        setInterval(updateMetrics, 1000);
+        
+        // Auto-refresh page every 10 seconds
+        setTimeout(() => location.reload(), 10000);
+    </script>
+</body>
+</html>
