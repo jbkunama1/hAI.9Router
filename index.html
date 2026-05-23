@@ -386,8 +386,13 @@
             document.getElementById('lastcheck').textContent = i18n[currentLang].lastCheckNow;
         }
 
+        function detectBrowserLanguage() {
+            const shortLang = (navigator.language || '').toLowerCase().slice(0, 2);
+            return supportedLanguages.includes(shortLang) ? shortLang : 'en';
+        }
+
         const savedLang = localStorage.getItem('9router_lang');
-        const browserLang = (navigator.language || '').toLowerCase().startsWith('de') ? 'de' : 'en';
+        const browserLang = detectBrowserLanguage();
         setLanguage(supportedLanguages.includes(savedLang) ? savedLang : browserLang);
         setInterval(updateMetrics, 1000);
         setTimeout(() => location.reload(), 10000);
