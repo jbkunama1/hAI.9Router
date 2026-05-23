@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 hAI.9Router | AI Routing Proxy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #1a1e2e 50%, #0d1117 100%);
+            min-height: 100vh;
+            color: #e6edf3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: #e6edf3;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover, .lang-btn.active {
+            background: rgba(58, 139, 255, 0.3);
+            border-color: #3a8bff;
+        }
+        
+        .logo {
+            max-width: 300px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 0 20px rgba(58, 139, 255, 0.3));
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #3a8bff 0%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #8b949e;
+            margin-bottom: 30px;
+        }
+        
+        .coffee {
+            margin: 20px 0;
+        }
+        
+        .coffee img {
+            transition: transform 0.3s;
+        }
+        
+        .coffee img:hover {
+            transform: scale(1.05);
+        }
+        
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .description {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .description h2 {
+            color: #3a8bff;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .description ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .description li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .description li:before {
+            content: "🔹";
+            position: absolute;
+            left: 0;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #3a8bff 0%, #2d6fcc 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(58, 139, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(58, 139, 255, 0.5);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6e 100%);
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+        }
+        
+        footer {
+            margin-top: 50px;
+            color: #6e7681;
+            font-size: 0.9rem;
+        }
+        
+        .content {
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo {
+                max-width: 200px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="switchLang('de')" id="btn-de">🇩🇪 DE</button>
+        <button class="lang-btn" onclick="switchLang('en')" id="btn-en">🇬🇧 EN</button>
+    </div>
+
+    <div class="container">
+        <img src="logo_9router.png" alt="hAI.9Router Logo" class="logo">
+        
+        <!-- German Content -->
+        <div id="content-de" class="content active">
+            <h1>🤖 hAI.9Router</h1>
+            <p class="subtitle">AI Routing Proxy — Portainer Stack Template</p>
+            
+            <div class="coffee">
+                <a href="https://www.buymeacoffee.com/highfish" target="_blank">
+                    <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" width="120" height="28" alt="Buy me a coffee">
+                </a>
+            </div>
+            
+            <div class="badges">
+                <img src="https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge&logo=docker" alt="Version">
+                <img src="https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge&logo=checkmarx" alt="Status">
+                <img src="https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge&logo=opensourceinitiative" alt="License">
+                <img src="https://img.shields.io/badge/Portainer-Stack-13BEF9?style=for-the-badge&logo=portainer" alt="Portainer">
+            </div>
+            
+            <div class="description">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li><strong>Intelligentes AI Routing</strong> zu OpenAI, Ollama und LocalAI</li>
+                    <li><strong>Live LAN Dashboard</strong> mit Echtzeit-Status auf Port 20128</li>
+                    <li><strong>Portainer Ready</strong> — direkter Stack-Import per YAML</li>
+                    <li><strong>Netzwerk-Isolation</strong> mit dediziertem Docker Bridge</li>
+                    <li><strong>Persistente Volumes</strong> für Config und Logs</li>
+                    <li><strong>Automatische Health Checks</strong> alle 30 Sekunden</li>
+                    <li><strong>Read-Only Filesystem</strong> für maximale Sicherheit</li>
+                </ul>
+            </div>
+            
+            <div class="buttons">
+                <a href="https://github.com/jbkunama1/hAI.9Router" class="btn" target="_blank">
+                    📦 GitHub Repository
+                </a>
+                <a href="https://github.com/jbkunama1/hAI.9Router/blob/main/README.md" class="btn-secondary btn" target="_blank">
+                    📖 Dokumentation (DE)
+                </a>
+                <a href="https://github.com/jbkunama1/hAI.9Router/blob/main/docker-compose.yml" class="btn" target="_blank">
+                    🐳 docker-compose.yml
+                </a>
+            </div>
+            
+            <footer>
+                MIT License — Copyright © 2026 jbkunama1<br>
+                Gebaut mit ❤️ für das Heimnetzwerk
+            </footer>
+        </div>
+        
+        <!-- English Content -->
+        <div id="content-en" class="content">
+            <h1>🤖 hAI.9Router</h1>
+            <p class="subtitle">AI Routing Proxy — Portainer Stack Template</p>
+            
+            <div class="coffee">
+                <a href="https://www.buymeacoffee.com/highfish" target="_blank">
+                    <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" width="120" height="28" alt="Buy me a coffee">
+                </a>
+            </div>
+            
+            <div class="badges">
+                <img src="https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge&logo=docker" alt="Version">
+                <img src="https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge&logo=checkmarx" alt="Status">
+                <img src="https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge&logo=opensourceinitiative" alt="License">
+                <img src="https://img.shields.io/badge/Portainer-Stack-13BEF9?style=for-the-badge&logo=portainer" alt="Portainer">
+            </div>
+            
+            <div class="description">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li><strong>Intelligent AI Routing</strong> to OpenAI, Ollama and LocalAI</li>
+                    <li><strong>Live LAN Dashboard</strong> with real-time status on port 20128</li>
+                    <li><strong>Portainer Ready</strong> — direct stack import via YAML</li>
+                    <li><strong>Network Isolation</strong> with dedicated Docker bridge</li>
+                    <li><strong>Persistent Volumes</strong> for config and logs</li>
+                    <li><strong>Automatic Health Checks</strong> every 30 seconds</li>
+                    <li><strong>Read-Only Filesystem</strong> for maximum security</li>
+                </ul>
+            </div>
+            
+            <div class="buttons">
+                <a href="https://github.com/jbkunama1/hAI.9Router" class="btn" target="_blank">
+                    📦 GitHub Repository
+                </a>
+                <a href="https://github.com/jbkunama1/hAI.9Router/blob/main/README_EN.md" class="btn-secondary btn" target="_blank">
+                    📖 Documentation (EN)
+                </a>
+                <a href="https://github.com/jbkunama1/hAI.9Router/blob/main/docker-compose.yml" class="btn" target="_blank">
+                    🐳 docker-compose.yml
+                </a>
+            </div>
+            
+            <footer>
+                MIT License — Copyright © 2026 jbkunama1<br>
+                Built with ❤️ for home networks
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        function switchLang(lang) {
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('content-' + lang).classList.add('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+            
+            document.documentElement.lang = lang;
+            localStorage.setItem('preferred-lang', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferred-lang');
+            if (savedLang && (savedLang === 'en' || savedLang === 'de')) {
+                switchLang(savedLang);
+            }
+        });
+    </script>
+</body>
+</html>
