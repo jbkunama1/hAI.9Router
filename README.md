@@ -1,16 +1,14 @@
 <div align="center">
-<img src="logo_9router.png" alt="hAI.9Router Logo" width="300">
- 
+
 # 🤖 hAI.9Router
 
-### AI Routing Proxy — Portainer Stack Template
+### AI Management Dashboard & Router — Portainer Stack
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge&logo=docker)](https://github.com/jbkunama1/hAI.9Router)
 [![Status](https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge&logo=checkmarx)](https://github.com/jbkunama1/hAI.9Router)
 [![License](https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
-[![Portainer](https://img.shields.io/badge/Portainer-Stack-13BEF9?style=for-the-badge&logo=portainer)](https://portainer.io)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker)](docker-compose.yml)
-[![LAN](https://img.shields.io/badge/LAN-Dashboard-FF6B35?style=for-the-badge&logo=googlechrome)](#lan-dashboard)
+[![Portainer](https://img.shields.io/badge/Portainer-Ready-13BEF9?style=for-the-badge&logo=portainer)](https://portainer.io)
+[![9Router](https://img.shields.io/badge/9Router-Official-764ba2?style=for-the-badge&logo=docker)](https://hub.docker.com/r/decolua/9router)
 
 ---
 
@@ -23,7 +21,9 @@
  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝    ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝╚═╝  ╚═╝
 ```
 
-**Intelligenter AI-Routing-Proxy mit Live-LAN-Dashboard — bereit fuer Portainer**
+**Zentrales AI-Management mit 60+ Providern — Web-UI & API**
+
+[Docker Hub](https://hub.docker.com/r/decolua/9router) • [Official Repo](https://github.com/decolua/9router) • [Documentation](https://9router.com)
 
 </div>
 
@@ -31,56 +31,45 @@
 
 ## 📋 Inhaltsverzeichnis
 
-- [✨ Features](#-features)
-- [🏗️ Architektur](#-architektur)
+- [✨ Was ist 9Router?](#-was-ist-9router)
+- [🎯 Features](#-features)
 - [🚀 Schnellstart](#-schnellstart)
 - [🐳 Portainer Stack Import](#-portainer-stack-import)
-- [🌐 LAN Dashboard](#-lan-dashboard)
-- [⚙️ Konfiguration](#-konfiguration)
+- [🌐 Web-Dashboard](#-web-dashboard)
+- [⚙️ Konfiguration](#%EF%B8%8F-konfiguration)
 - [📁 Dateistruktur](#-dateistruktur)
 - [🔧 Troubleshooting](#-troubleshooting)
 - [📜 Lizenz](#-lizenz)
 
 ---
 
-## ✨ Features
+## ✨ Was ist 9Router?
 
-| Feature | Beschreibung |
-|--------|-------------|
-| 🤖 **AI Routing** | Intelligentes Routing zu verschiedenen AI-Backends (OpenAI, Ollama, LocalAI) |
-| 🌐 **LAN Dashboard** | Visuelles Status-Dashboard fuer alle LAN-Dienste auf Port `20128` |
-| 🐳 **Portainer Ready** | Direkter Stack-Import per YAML — kein CLI benoetigt |
-| 🔒 **Netzwerk-Isolation** | Dediziertes Docker-Bridge-Netzwerk `9router_net` |
-| 💾 **Persistente Volumes** | Config + Logs bleiben bei Container-Restart erhalten |
-| 📊 **Health Checks** | Automatische Gesundheitsueberpruefung alle 30 Sekunden |
-| 🔄 **Auto-Restart** | `unless-stopped` Policy fuer maximale Verfuegbarkeit |
-| 🛡️ **Read-Only FS** | Sicherheitshaertung durch Read-Only-Dateisystem |
+**9Router** ist ein **All-in-One AI Management Dashboard**, das:
+
+🎯 Zugriff auf **60+ AI-Provider** bietet (OpenAI, Claude, Gemini, etc.)  
+📊 **Smart Fallback** zwischen kostenlosen und bezahlten Modellen  
+🔑 **API-Key-Management** mit zentraler Verwaltung  
+📊 **Usage Tracking** und Kostenübersicht  
+🌐 **Web-UI** für einfache Konfiguration  
+🔌 **OpenAI-kompatible API** für bestehende Tools  
+
+> **Wichtig:** 9Router ist **KEIN** einfacher Reverse Proxy, sondern eine vollwertige Plattform zur Verwaltung aller deiner AI-Dienste!
 
 ---
 
-## 🏗️ Architektur
+## 🎯 Features
 
-```
-╔══════════════════════════════════════════════════════════╗
-║                    LAN / Home Network                    ║
-║                                                          ║
-║  Browser ──────────────────────────────────────────────► ║
-║              ↓ Port 20128                                ║
-║  ┌───────────────────────────────────────────────────┐   ║
-║  │               🤖 hAI.9Router Container            │   ║
-║  │                                                   │   ║
-║  │  ┌─────────────┐    ┌────────────────────────┐   │   ║
-║  │  │ 🌐 Dashboard │    │   AI Routing Engine    │   │   ║
-║  │  │  index.html │    │  /v1/chat/completions  │   │   ║
-║  │  └─────────────┘    └──────────┬─────────────┘   │   ║
-║  │                                │                  │   ║
-║  │              ┌─────────────────┼──────────────┐   │   ║
-║  │              ▼                 ▼              ▼   │   ║
-║  │        🟢 OpenAI        🟡 Ollama      🔵 LocalAI  │   ║
-║  └───────────────────────────────────────────────────┘   ║
-║              9router_net (bridge)                        ║
-╚══════════════════════════════════════════════════════════╝
-```
+| Feature | Beschreibung |
+|--------|-------------|
+| 🐳 **Docker-ready** | Offizielles Image: `decolua/9router:latest` |
+| 🌐 **Web Dashboard** | Vollständige UI auf Port `20128` |
+| 🔑 **Multi-Provider** | 60+ AI-Provider in einem Dashboard |
+| 📊 **Smart Routing** | Auto-Fallback zu kostenlosen Alternativen |
+| 🔒 **Authentifizierung** | JWT-basiert mit Passwortschutz |
+| 💾 **Persistenz** | Alle Einstellungen in `./data` gespeichert |
+| 🚀 **Portainer-ready** | Direkter Stack-Import aus GitHub |
+| ❤️ **Health Checks** | Automatische Überwachung alle 30s |
 
 ---
 
@@ -89,11 +78,9 @@
 ### Voraussetzungen
 
 ```bash
-# Mindestanforderungen
 ✅ Docker >= 24.0
 ✅ Docker Compose >= 2.20  
-✅ Portainer >= 2.19 (optional, aber empfohlen)
-✅ 256 MB RAM
+✅ Portainer >= 2.19 (optional)
 ✅ Port 20128 frei
 ```
 
@@ -104,20 +91,29 @@
 git clone https://github.com/jbkunama1/hAI.9Router.git
 cd hAI.9Router
 
-# 2. Umgebungsvariablen konfigurieren
-cp .env.example .env
-nano .env  # API-Keys eintragen
-
-# 3. Stack starten
+# 2. Stack starten
 docker compose up -d
 
-# 4. Dashboard aufrufen
+# 3. Dashboard öffnen
 open http://localhost:20128
+
+# 4. Login mit Standardpasswort
+# Passwort: 123456
 ```
 
-### Option B: Portainer Stack Import
+### Option B: Docker Run (Schnelltest)
 
-> Siehe Abschnitt [Portainer Stack Import](#-portainer-stack-import) fuer detaillierte Anleitung
+```bash
+mkdir -p ./data
+
+docker run -d \
+  --name 9router \
+  -p 20128:20128 \
+  -v "$(pwd)/data:/app/data" \
+  -e DATA_DIR=/app/data \
+  -e INITIAL_PASSWORD=123456 \
+  decolua/9router:latest
+```
 
 ---
 
@@ -125,12 +121,12 @@ open http://localhost:20128
 
 <div align="center">
 
-### Schritt-fuer-Schritt Anleitung
+### Schritt-für-Schritt Anleitung
 
 </div>
 
 ```
-Schritt 1 ──► Portainer oeffnen (http://portainer:9000)
+Schritt 1 ──► Portainer öffnen (http://portainer:9000)
     │
     ▼
 Schritt 2 ──► Stacks ► + Add Stack
@@ -141,32 +137,38 @@ Schritt 3 ──► Build method: Repository
               Compose path:   docker-compose.yml
     │
     ▼
-Schritt 4 ──► Environment Variables hinzufuegen:
-              OPENAI_API_KEY = sk-...
-              ROUTER_PORT    = 20128
+Schritt 4 ──► Environment variables (optional):
+              INITIAL_PASSWORD = dein_sicheres_passwort
+              JWT_SECRET       = lange_zufällige_zeichenkette
+              ROUTER_PORT      = 20128
     │
     ▼
 Schritt 5 ──► Deploy the stack ✅
 ```
 
-> 💡 **Tipp:** Alternativ `docker-compose.yml` direkt als "Web editor"-Inhalt einfuegen.
-
 ---
 
-## 🌐 LAN Dashboard
+## 🌐 Web-Dashboard
 
-Das integrierte Status-Dashboard ist erreichbar unter:
+Das integrierte Web-UI ist erreichbar unter:
 
 ```
 http://<deine-LAN-IP>:20128
 ```
 
 **Dashboard-Features:**
-- 🟢 Live-Status aller konfigurierten AI-Backends
-- 📈 Request-Statistiken in Echtzeit  
-- 🔄 Auto-Refresh alle 10 Sekunden
-- 📱 Mobile-freundliches Design
-- 🌙 Dark Mode by default
+
+- 📋 **Provider-Verwaltung**: Füge API-Keys für 60+ Services hinzu
+- 📈 **Usage Analytics**: Echtzeit-Statistiken deiner API-Nutzung
+- ⚙️ **Routing-Regeln**: Konfiguriere Fallback-Ketten
+- 📊 **Cost Tracking**: Überwache deine AI-Kosten
+- 🔑 **API-Key-Generator**: Erstelle Zugangsschlüssel für deine Apps
+- 👥 **Multi-User**: Unterstützt mehrere Accounts
+
+**Standard-Login:**
+- **Passwort:** `123456` (aus `INITIAL_PASSWORD`)
+
+> 🚨 **Sicherheit:** Ändere das Passwort sofort nach dem ersten Login!
 
 ---
 
@@ -176,29 +178,25 @@ http://<deine-LAN-IP>:20128
 
 | Variable | Standard | Beschreibung |
 |----------|---------|-------------|
-| `ROUTER_PORT` | `20128` | Externer Port des Dashboards |
-| `OPENAI_API_KEY` | — | OpenAI API-Schluessel |
-| `OLLAMA_HOST` | `http://ollama:11434` | Ollama Backend-URL |
-| `LOCAL_AI_HOST` | `http://localai:8080` | LocalAI Backend-URL |
-| `LOG_LEVEL` | `info` | Logging-Level (`debug`/`info`/`warn`/`error`) |
-| `HEALTH_CHECK_INTERVAL` | `30` | Health-Check-Intervall in Sekunden |
+| `DATA_DIR` | `/app/data` | Datenbankverzeichnis |
+| `PORT` | `20128` | Interner Port |
+| `ROUTER_PORT` | `20128` | Externer Port-Mapping |
+| `INITIAL_PASSWORD` | `123456` | Erstes Login-Passwort |
+| `JWT_SECRET` | auto | JWT-Signaturschlüssel |
+| `TZ` | `Europe/Berlin` | Zeitzone |
 
-### Netzwerke
+### Volume-Mapping
 
 ```yaml
-# Intern: Container-Kommunikation
-9router_net:    bridge, intern
-
-# Optional: Verbindung zu bestehendem Traefik/NGINX
-proxy_net:      external (falls vorhanden)
+volumes:
+  - ./data:/app/data  # SQLite-DB + Konfigurationen
 ```
 
-### Volumes
-
-```
-9router_config:/app/config    # Routing-Konfiguration
-9router_logs:/app/logs        # Anwendungslogs
-```
+**Wichtig:** Das `./data`-Verzeichnis wird automatisch erstellt und enthält:
+- `9router.db` - SQLite-Datenbank
+- Provider-Konfigurationen
+- API-Keys (verschlüsselt)
+- Usage-Logs
 
 ---
 
@@ -208,10 +206,14 @@ proxy_net:      external (falls vorhanden)
 hAI.9Router/
 ├── 📄 README.md                  # Diese Datei
 ├── 📄 LICENSE                    # MIT Lizenz
-├── 🐳 docker-compose.yml         # Portainer Stack Definition
-├── 🌐 index.html                 # LAN Status Dashboard
+├── 🐳 docker-compose.yml         # Portainer Stack (61 Zeilen)
+├── 🌐 index.html                 # Info-Seite (optional)
 ├── ⚙️  .env.example              # Umgebungsvariablen-Vorlage
 └── 📋 portainer-template.json   # Portainer App Template
+
+Generiert beim Start:
+data/
+└── 9router.db                    # SQLite-Datenbank
 ```
 
 ---
@@ -221,28 +223,53 @@ hAI.9Router/
 ### Port 20128 bereits belegt
 
 ```bash
-# Belegung pruefen
+# Prüfen
 sudo lsof -i :20128
-# Alternativen Port in .env setzen
-ROUTER_PORT=20129
+
+# Alternativen Port in docker-compose.yml
+ports:
+  - "20129:20128"  # Externer Port 20129
 ```
 
 ### Container startet nicht
 
 ```bash
-# Logs pruefen
+# Logs prüfen
 docker compose logs -f 9router
+
+# Volume-Berechtigungen prüfen
+chmod 755 ./data
+```
+
+### Login funktioniert nicht
+
+```bash
+# Passwort zurücksetzen
+docker compose down
+rm -rf ./data/9router.db
+docker compose up -d
+
+# Neues Passwort: INITIAL_PASSWORD aus docker-compose.yml
+```
+
+### Health Check schlägt fehl
+
+```bash
+# Direkt testen
+curl http://localhost:20128
+
 # Container-Status
 docker compose ps
 ```
 
-### Health Check schlaegt fehl
+---
 
-```bash
-# Direkt testen
-curl http://localhost:20128/health
-# Erwartete Antwort: {"status":"ok"}
-```
+## 🔗 Nützliche Links
+
+- **Official 9Router:** https://github.com/decolua/9router
+- **Docker Hub:** https://hub.docker.com/r/decolua/9router
+- **Website:** https://9router.com
+- **Dieses Template:** https://github.com/jbkunama1/hAI.9Router
 
 ---
 
@@ -250,17 +277,19 @@ curl http://localhost:20128/health
 
 MIT License — Copyright (c) 2026 [jbkunama1](https://github.com/jbkunama1)
 
-Siehe [LICENSE](LICENSE) fuer den vollstaendigen Text.
+> **Hinweis:** Dieses Repository ist ein Portainer-Stack-Template für [decolua/9router](https://github.com/decolua/9router).  
+> 9Router selbst hat eine eigene Lizenz — siehe [Original-Repo](https://github.com/decolua/9router).
 
 ---
 
 <div align="center">
 
-**Gebaut mit ❤️ fuer das Heimnetzwerk**
+**Gebaut mit ❤️ für das Heimnetzwerk**
 
 [![GitHub](https://img.shields.io/badge/GitHub-jbkunama1-181717?style=flat-square&logo=github)](https://github.com/jbkunama1)
 [![Repo](https://img.shields.io/badge/Repo-hAI.9Router-blue?style=flat-square&logo=github)](https://github.com/jbkunama1/hAI.9Router)
+[![9Router](https://img.shields.io/badge/Powered%20by-9Router-764ba2?style=flat-square)](https://github.com/decolua/9router)
 
-*🤖 9Router • AI trifft Heimnetz • Portainer-ready*
+*🤖 9Router • 60+ AI Provider • Portainer-ready*
 
 </div>
