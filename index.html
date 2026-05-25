@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 hAI.9Router | Portainer Stack</title>
+    <title>hAI.9Router</title>
     <style>
         * {
             margin: 0;
@@ -12,197 +12,100 @@
         }
         
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
             padding: 20px;
         }
         
         .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 60px 40px;
+            background: white;
+            border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
+            max-width: 600px;
+            padding: 40px;
             text-align: center;
         }
         
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
         }
         
         .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            opacity: 0.95;
-            font-weight: 300;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
         }
         
-        .info-box {
-            background: rgba(255,255,255,0.15);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: left;
-            border: 1px solid rgba(255,255,255,0.2);
+        .description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
         
-        .info-box h2 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+        .links {
             display: flex;
-            align-items: center;
             gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
-        .info-box p {
-            line-height: 1.8;
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-        
-        .info-box ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .info-box li {
-            padding: 8px 0;
-            padding-left: 30px;
-            position: relative;
-        }
-        
-        .info-box li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #00ff88;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .dashboard-btn {
+        a {
             display: inline-block;
-            background: rgba(255,255,255,0.25);
-            padding: 18px 45px;
-            border-radius: 50px;
+            padding: 12px 24px;
+            border-radius: 6px;
             text-decoration: none;
-            color: #fff;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-top: 30px;
-            transition: all 0.3s;
-            border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        .dashboard-btn:hover {
-            background: rgba(255,255,255,0.35);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        .btn-primary {
+            background: #667eea;
+            color: white;
         }
         
-        .warning {
-            background: rgba(255, 193, 7, 0.2);
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
         
-        .warning strong {
-            color: #ffc107;
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #667eea;
         }
         
-        footer {
-            margin-top: 40px;
-            opacity: 0.7;
-            font-size: 0.9rem;
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
         }
         
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-        }
-        
-        footer a:hover {
-            border-bottom-color: #fff;
-        }
-        
-        .badge {
-            display: inline-block;
-            background: rgba(0,255,136,0.2);
-            color: #00ff88;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin: 5px;
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🤖 hAI.9Router</h1>
-        <p class="subtitle">AI Management Dashboard - Portainer Stack Template</p>
+        <div class="emoji">🤖</div>
+        <h1>hAI.9Router</h1>
+        <p class="subtitle">AI Routing Proxy – Portainer Stack mit LAN Status Dashboard</p>
         
-        <div class="info-box">
-            <h2>🌐 9Router Dashboard</h2>
-            <p>Dieser Stack ist <strong>erfolgreich deployed</strong>! Das 9Router Web-Dashboard ist jetzt verfügbar.</p>
-            <p><strong>Zugriff:</strong></p>
-            <ul>
-                <li>Dashboard: <code>http://&lt;deine-IP&gt;:20128</code></li>
-                <li>Standard-Passwort: <code>123456</code></li>
-                <li>API-Endpoint: <code>http://&lt;deine-IP&gt;:20128/v1</code></li>
-            </ul>
+        <p class="description">
+            Ein professionelles Routing-Proxy-System mit KI-Unterstützung, optimiert für Portainer-Umgebungen mit integriertem LAN Status Dashboard für Überwachung und Verwaltung.
+        </p>
+        
+        <div class="links">
+            <a href="https://github.com/jbkunama1/hAI.9Router" class="btn-primary">🔗 Repository</a>
+            <a href="https://github.com/jbkunama1/hAI.9Router/blob/main/README.md" class="btn-secondary">📖 Dokumentation</a>
         </div>
-        
-        <div class="info-box">
-            <h2>✨ Was ist 9Router?</h2>
-            <p>9Router ist ein <strong>zentrales AI-Management-Dashboard</strong>, das dir Zugriff auf 60+ AI-Provider gibt:</p>
-            <ul>
-                <li><span class="badge">OpenAI</span> <span class="badge">Claude</span> <span class="badge">Gemini</span></li>
-                <li><span class="badge">Mistral</span> <span class="badge">Cohere</span> <span class="badge">Perplexity</span></li>
-                <li>... und viele mehr!</li>
-            </ul>
-            <p style="margin-top: 15px;">Im Dashboard kannst du:</p>
-            <ul>
-                <li>API-Keys für alle Provider zentral verwalten</li>
-                <li>Smart Fallback-Ketten konfigurieren</li>
-                <li>Kosten überwachen und Usage tracken</li>
-                <li>Eigene API-Keys für deine Apps generieren</li>
-            </ul>
-        </div>
-        
-        <div class="warning">
-            <strong>⚠️ Sicherheitshinweis:</strong> Ändere das Standard-Passwort <code>123456</code> sofort nach dem ersten Login im Dashboard!
-        </div>
-        
-        <a href="http://localhost:20128" class="dashboard-btn">
-            🚀 Zum 9Router Dashboard
-        </a>
-        
-        <footer>
-            <p>
-                <a href="https://github.com/jbkunama1/hAI.9Router" target="_blank">GitHub Repository</a> • 
-                <a href="https://github.com/decolua/9router" target="_blank">Official 9Router</a> • 
-                <a href="https://hub.docker.com/r/decolua/9router" target="_blank">Docker Hub</a>
-            </p>
-            <p style="margin-top: 15px; font-size: 0.85rem;">
-                Portainer Stack Template v1.0.0 • Powered by 9Router
-            </p>
-        </footer>
     </div>
 </body>
 </html>
