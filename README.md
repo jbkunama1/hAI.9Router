@@ -37,6 +37,7 @@
 - [🐳 Portainer Stack Import](#-portainer-stack-import)
 - [🌐 Web-Dashboard](#-web-dashboard)
 - [⚙️ Konfiguration](#%EF%B8%8F-konfiguration)
+- [🔄 Update](#-update)
 - [📁 Dateistruktur](#-dateistruktur)
 - [🔧 Troubleshooting](#-troubleshooting)
 - [📜 Lizenz](#-lizenz)
@@ -197,6 +198,47 @@ volumes:
 - Provider-Konfigurationen
 - API-Keys (verschlüsselt)
 - Usage-Logs
+
+---
+
+## 🔄 Update
+
+Das Update ersetzt nur das Docker-Image. Deine `.env`, `docker-compose.yml` und alle Daten im `./data`-Verzeichnis bleiben **vollständig erhalten**.
+
+> 💡 **Tipp:** Prüfe vor jedem Update die [Releases](https://github.com/jbkunama1/hAI.9Router/releases) und das [Original-Repo](https://github.com/decolua/9router/releases) auf Breaking Changes oder neue Umgebungsvariablen.
+
+### Option A: CLI (Docker Compose)
+
+```bash
+# 1. Ins Projektverzeichnis wechseln
+cd /pfad/zu/hAI.9Router
+
+# 2. Neues Image holen
+docker compose pull
+
+# 3. Container neu starten
+docker compose up -d
+```
+
+### Option B: Portainer GUI
+
+```
+Portainer öffnen ──► Stacks ──► hAI.9Router
+    │
+    ▼
+"Pull and redeploy" klicken ──► Bestätigen ✅
+```
+
+Portainer stoppt den laufenden Container, zieht das neue Image und startet alles automatisch neu.
+
+### Was bleibt erhalten?
+
+| Komponente | Status |
+|---|---|
+| `.env` / Umgebungsvariablen | ✅ Erhalten |
+| `docker-compose.yml` | ✅ Erhalten |
+| `./data` (Datenbank, API-Keys, Logs) | ✅ Erhalten |
+| Container-Image | ⬆️ Wird aktualisiert |
 
 ---
 
