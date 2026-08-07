@@ -1,5 +1,9 @@
 <div align="center">
 
+<a href="https://www.buymeacoffee.com/highfish">
+<img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
+
 # 🤖 hAI.9Router
 
 ### AI Management Dashboard & Router — Portainer Stack
@@ -335,3 +339,4 @@ MIT License — Copyright (c) 2026 [jbkunama1](https://github.com/jbkunama1)
 *🤖 9Router • 60+ AI Provider • Portainer-ready*
 
 </div>
+
